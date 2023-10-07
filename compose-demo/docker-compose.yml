@@ -1,0 +1,46 @@
+version: "1.0"
+# Este archivo genera relaciones entre contenedores
+# Guarda la configuración de nuestros contenedores
+# Genera ambientes de desarrollo con solo una línea command
+# Este archivo se basa en los siguientes elementos:
+#  - containers
+#  - networks
+#  - volumes
+#  PRACTICA 2
+#  Crear volúmenes para Drupal uno para modules, otro para profiles, themes y sites
+# /var/www/html/modules ---  /var/www/html/........
+services:
+  cms: #nombre del servicio
+    image: wordpress
+    ports:
+      - 8080:80
+    environment:
+      - WORDPRESS_DB_HOST=db
+      - WORDPRESS_DB_USER=db_user
+      - WORDPRESS_DB_PASSWORD=P4$$w0rd
+      - WORDPRESS_DB_NAME=site_db
+    volumes:
+      - site-data:/var/www/html
+
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: superuser
+      MYSQL_DATABASE: site_db
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: P4$$w0rd
+    volumes:
+      - db-data:/var/lib/mysql
+
+  admin:
+    image: phpmyadmin
+    ports:
+      - 8081:80
+    environment:
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: P4$$w0rd
+
+volumes:
+  site-data:
+  db-data:
+

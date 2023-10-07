@@ -1,0 +1,24 @@
+services:
+  drupal:
+    image: drupal:7.98-php8.2-fpm-bookworm
+    ports: 
+      - "8081:80"
+    volumes:
+      - drupal-modules:/var/www/html/modules
+      - drupal-profiles:/var/www/html/profiles
+      - drupal-themes:/var/www/html/themes
+      - drupal-sites:/var/www/html/sites
+    restart: always
+
+  postgres:
+    image: postgres:11-alpine3.17
+    environment:
+      POSTGRES_PASSWORD: myPassword
+    restart: always
+
+
+volumes:
+  drupal-modules:
+  drupal-profiles:
+  drupal-themes:
+  drupal-sites:

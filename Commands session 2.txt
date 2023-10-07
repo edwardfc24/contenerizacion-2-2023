@@ -1,0 +1,18 @@
+docker image build -t name:version . (Contexto actual)
+docker image build -f path_al_archivo -t name:version 
+
+docker image history image_name
+docker image inspect image_name
+
+docker image pull image_name:tag 
+
+docker login {-u username -p password}
+docker image push username/image_name
+
+//////// COMANDOS UTILES ///////
+WORKDIR Cambia el path al especificado por el usuario y todos los
+        comandos ejecutados a partir de ese momento, se hacen en ese         	path
+
+COPY 	Copia carpetas o archivos de la máquina huesped a la imagen, 	funciona con source_path dest_path
+
+RUN	Ejecuta comandos en el bash como si fuera la terminal de la 	imagen

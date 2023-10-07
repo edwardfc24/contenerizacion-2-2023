@@ -1,0 +1,5 @@
+docker swarm --help
+
+Para inicializar el nodo utilizamos  docker swarm init
+
+docker stack --help

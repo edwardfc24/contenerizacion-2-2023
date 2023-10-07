@@ -1,0 +1,31 @@
+services:
+  drupal:
+    image: edwardfc/drupal
+    ports: 
+      - "8081:80"
+    volumes:
+      - drupal-modules:/var/www/html/modules
+      - drupal-profiles:/var/www/html/profiles
+      - drupal-themes:/var/www/html/themes
+      - drupal-sites:/var/www/html/sites
+    deploy:
+      replicas: 3 # Se recomienda siempre un número impar, empezando en 3
+      update_config: # Cuando en el estado del manager se identifica un cambio, se ejcutan las siguientes políticas
+        parallelism: 2
+      restart_policy:
+        condition: on-failure
+
+
+  postgres:
+    image: postgres:14.3
+    environment:
+      POSTGRES_PASSWORD: myPassword
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+volumes:
+  drupal-modules:
+  drupal-profiles:
+  drupal-themes:
+  drupal-sites:
